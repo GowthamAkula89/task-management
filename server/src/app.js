@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet=require("helmet");
 const cors = require("cors");
+const routes = require('./routes/index');
 
 const app  = express();
 //Helmet is a middleware that helps secure your Express.js applications by setting various HTTP headers.
@@ -11,5 +12,5 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-
+app.use('/api', routes)
 module.exports = app;
