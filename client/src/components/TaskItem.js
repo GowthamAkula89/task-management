@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
 import { BsHourglassSplit, BsCheckCircle, BsPlayCircle } from 'react-icons/bs';
+import TaskForm from './TaskForm';
 
-const TaskItem = ({ task, onDelete, onEdit }) => {
-
+const TaskItem = ({ task, onDelete }) => {
+    const [isEditFormOpen, setIsEditFormOpen] = useState(false);
     const getStatusIcon = (status) => {
         switch (status.toLowerCase()) {
             case 'pending':
@@ -32,6 +33,7 @@ const TaskItem = ({ task, onDelete, onEdit }) => {
     };
 
     return (
+        <>
         <div className="flex justify-between gap-2 items-start border p-4 shadow-lg rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out">
             <div className="flex gap-2 justify-between">
                 <div className='flex flex-col gap-2'>
@@ -46,18 +48,20 @@ const TaskItem = ({ task, onDelete, onEdit }) => {
             <div className="flex items-center gap-3">
                 <button
                     className="icon-button text-blue-600 hover:text-blue-800 transition"
-                    onClick={() => onEdit(task)}
+                    onClick={() => setIsEditFormOpen(true)}
                 >
                     <FaEdit size={18} />
                 </button>
                 <button
                     className="icon-button text-red-600 hover:text-red-800 transition"
-                    onClick={() => onDelete(task.id)}
+                    onClick={() => onDelete(task._id)}
                 >
                     <FaTrash size={18} />
                 </button>
             </div>
         </div>
+        {isEditFormOpen && <TaskForm setIsEditFormOpen={setIsEditFormOpen} isEdit = {true} task = {task}/>}
+        </>
     );
 };
 
