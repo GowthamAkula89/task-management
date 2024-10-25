@@ -15,7 +15,7 @@ export const createTask = async (task) => {
         const response = await axios.post(`${API_URL}/tasks`, task);
         return response.data;
     } catch (error) {
-        throw new Error(error.response ? error.response.data : 'Failed to create task');
+        throw new Error(error.response ? error.response.data.message : 'Failed to create task');
     }
 };
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
-import { setList, setFilteredList } from '../redux/Reducers/tasksSlice';
+import { setFilteredList } from '../redux/Reducers/tasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTask } from '../apis/taskService';
 import CustomDropdown from './CustomDropdown';
 import { IoMdAddCircleOutline } from "react-icons/io";
 
@@ -13,17 +12,6 @@ const TaskList = () => {
     const filter = useSelector((state) => state.tasks.filter);
     const [isModelOpen, setIsModelOpen] = useState(false);
     const dispatch = useDispatch()
-
-    const handleDelete = async (id) => {
-        console.log("Task List", "delete clicked")
-        try{
-            await deleteTask(id);
-            const updatedList = list.filter((item) => item._id !== id);
-            dispatch(setList(updatedList));
-        }catch(error){
-            console.log("Delete Failed:", error);
-        }
-    }
 
     useEffect(() => {
         let updatedList = list;
@@ -57,7 +45,6 @@ const TaskList = () => {
                         <TaskItem
                             key={task._id}
                             task={task}
-                            onDelete={handleDelete}
                         />
                     ))
                 ) : (

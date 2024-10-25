@@ -19,7 +19,7 @@ const Header = () => {
 
 
     return (
-        <header className="bg-gradient-to-r from-green-700 to-green-900 p-3 shadow-lg">
+        <header className="header p-3 shadow-lg">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-2">
                     <GoTasklist className="text-3xl text-white" />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createTask, editTask } from "../apis/taskService";
 import { setList, addTask } from "../redux/Reducers/tasksSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useSnackbar } from 'notistack';
 
 const TaskForm = ({ setIsModelOpen, setIsEditFormOpen, isEdit, task }) => {
     const list = useSelector((state) => state.tasks.list);
@@ -10,7 +11,7 @@ const TaskForm = ({ setIsModelOpen, setIsEditFormOpen, isEdit, task }) => {
     const [status, setStatus] = useState("Pending");
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
-    
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         if (isEdit && task) {
@@ -26,6 +27,10 @@ const TaskForm = ({ setIsModelOpen, setIsEditFormOpen, isEdit, task }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(title === "" || description === ""){
+            enqueueSnackbar('Please fill all the fields.', { variant: 'warning' });
+            return;
+        }
         setIsLoading(true);
         const newTask = { title, description, status };
 
@@ -35,13 +40,15 @@ const TaskForm = ({ setIsModelOpen, setIsEditFormOpen, isEdit, task }) => {
                 await editTask(task._id, newTask);
                 const updatedList = list.map((item) => item._id === task._id ? { ...item, ...newTask } : item);
                 dispatch(setList(updatedList));
+                enqueueSnackbar('Task Updated successfully!', { variant: 'success' });
             } else {
                 // If creating
                 const data = await createTask(newTask);
                 dispatch(addTask(data));
+                enqueueSnackbar('Task Created successfully!', { variant: 'success' });
             }
         } catch (err) {
-            console.log("Error in submitting task", err);
+            enqueueSnackbar( err + ", Task already exist", {variant:'error'})
         }
         setIsLoading(false)
         isEdit ? setIsEditFormOpen(false) : setIsModelOpen(false);
