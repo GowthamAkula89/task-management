@@ -4,7 +4,11 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState: {
         list: [],
-        filteredList : []
+        filteredList : [],
+        filter :{
+            text:"",
+            status:""
+        }
     },
     reducers: {
         setList: (state, action) => {
@@ -15,6 +19,12 @@ const tasksSlice = createSlice({
         },
         setFilteredList: (state, action) => {
             state.filteredList = action.payload
+        },
+        setfilterText: (state, action) => {
+            state.filter.text = action.payload
+        },
+        setfilterStatus: (state, action) => {
+            state.filter.status = action.payload
         }
     },
 });
@@ -22,7 +32,9 @@ const tasksSlice = createSlice({
 export const {
     setList,
     addTask,
-    setFilteredList
+    setFilteredList,
+    setfilterText,
+    setfilterStatus
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

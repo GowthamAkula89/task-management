@@ -1,35 +1,22 @@
 import { useState, useEffect } from "react";
 import { GoTasklist } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilteredList } from "../redux/Reducers/tasksSlice";
+import { useDispatch } from "react-redux";
+import { setfilterText } from "../redux/Reducers/tasksSlice";
 
 const Header = () => {
-    const list = useSelector((state) => state.tasks.list);
+
     const [searchText, setSearchText] = useState("");
-    const [debouncedSearch, setDebouncedSearch] = useState(searchText);
     const dispatch = useDispatch();
 
     useEffect(() => {
         const handler = setTimeout(() => {
-            setDebouncedSearch(searchText);
-        }, 500);
+            dispatch(setfilterText(searchText));
+        }, 1000);
 
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [searchText]);
+        return () => clearTimeout(handler);
+    }, [searchText, dispatch]);
 
-    useEffect(() => {
-        handleSearch();
-    }, [debouncedSearch]);
-
-    const handleSearch = () => {
-        const filteredTasks = list.filter((task) =>
-            task.title.toLowerCase().includes(debouncedSearch.toLowerCase())
-        );
-        dispatch(setFilteredList(filteredTasks));
-    };
 
     return (
         <header className="bg-gradient-to-r from-green-700 to-green-900 p-3 shadow-lg">

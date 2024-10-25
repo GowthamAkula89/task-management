@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setList, setFilteredList } from './redux/Reducers/tasksSlice';
 import TaskList from './components/TaskList';
 import { fetchTasks } from './apis/taskService';
 
 function App() {
-  const list = useSelector((state) => state.tasks.list);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +26,7 @@ function App() {
   return (
     <div className="App">
         <Header/>
-        <TaskList tasks={list}/>
+        <TaskList />
     </div>
   );
 }
