@@ -18,3 +18,21 @@ export const createTask = async (task) => {
         throw new Error(error.response ? error.response.data : 'Failed to create task');
     }
 };
+
+export const editTask = async (id, updatedTask) => {
+    try {
+        const response = await axios.put(`${API_URL}/tasks/${id}`, updatedTask);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response ? error.response.data : 'Failed to update task');
+    }
+};
+
+export const deleteTask = async (id) => {
+    try {
+        const response = await axios.delete(`${API_URL}/tasks/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response ? error.response.data : 'Failed to delete task');
+    }
+};
