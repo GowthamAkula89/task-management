@@ -18,16 +18,16 @@ const CustomDropdown = () => {
 
 
     return (
-        <div className="relative inline-block w-52">
+        <div className="relative inline-block w-52 ">
         <div 
-            className="w-full p-2 bg-gray-100 text-end cursor-pointer flex items-center justify-between"
+            className="w-full p-2 bg-gray-100 text-end rounded-sm cursor-pointer flex items-center justify-between"
             onClick={() => setIsOpen(!isOpen)}
         >
             {selectedOption || 'Filter'}
             {isOpen ? (
-            <IoIosArrowUp className="ml-2 text-gray-500" />
+                <IoIosArrowUp className="ml-2 text-gray-500" />
             ) : (
-            <IoIosArrowDown className="ml-2 text-gray-500" />
+                <IoIosArrowDown className="ml-2 text-gray-500" />
             )}
         </div>    
 
@@ -43,10 +43,8 @@ const CustomDropdown = () => {
                         {option}
                     </div>
                 ))}
-                <div
-                    className={`p-2 w-full text-right font-medium text-gray-700 hover:bg-gray-200 cursor-pointer ${
-                        selectedOption === '' ? 'font-bold' : ''
-                    }`}
+                <div className={`p-2 w-full text-right font-medium text-gray-700 hover:bg-gray-200 cursor-pointer ${
+                        selectedOption === '' ? 'font-bold' : ''}`}
                     onClick={() => handleOptionClick('')}
                 >
                     None

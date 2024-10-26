@@ -1,6 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .App {
     background: linear-gradient(to bottom, #aec6c9, #89bcc3);
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
+    background-attachment: fixed;
 }
 
 .header {

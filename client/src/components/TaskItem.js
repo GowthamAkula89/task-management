@@ -56,7 +56,7 @@ const TaskItem = ({ task }) => {
 
     return (
         <>
-        <div className=" task-item flex justify-between gap-2 items-start h-full border p-4 shadow-lg rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out">
+        <div className=" task-item flex justify-between gap-2 items-start h-full p-4 shadow-lg rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 ease-in-out">
 
             <div className='flex flex-col gap-2 justify-between h-full'>
                 <div className='flex flex-col gap-2'>
