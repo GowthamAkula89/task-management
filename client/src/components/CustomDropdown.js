@@ -18,7 +18,7 @@ const CustomDropdown = () => {
 
 
     return (
-        <div className="relative inline-block w-52 ">
+        <div className="relative inline-block w-40 md:w-52 ">
         <div 
             className="w-full p-2 bg-gray-100 text-end rounded-sm cursor-pointer flex items-center justify-between"
             onClick={() => setIsOpen(!isOpen)}
